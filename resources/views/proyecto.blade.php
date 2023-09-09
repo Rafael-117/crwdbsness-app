@@ -60,35 +60,39 @@
 
                         <div class="row mt-4">
                             <div class="col-md-4 col-6 mb-3">
+                                
+
                                 <div class='ctrl'>
-                                    <div class='ctrl__button ctrl__button--decrement'>&ndash;</div>
-                                    <div class='ctrl__counter'>
-                                        <input class='ctrl__counter-input' maxlength='10' type='text' value='1'>
-                                        <div class='ctrl__counter-num'>1</div>
+                                    <div class='ctrl-button ctrl-button-decrement'>-</div>
+                                    <div class='ctrl-counter'>
+                                      <input class='ctrl-counter-input' maxlength='10' type='text' value='0' name="cantidad" id=cantidad>
+                                      <div class='ctrl-counter-num'>0</div>
                                     </div>
-                                    <div class='ctrl__button ctrl__button--increment'>+</div>
-                                </div>
+                                    <div class='ctrl-button ctrl-button-increment'>+</div>
+                                  </div>
+
+
                             </div>
                         </div>
 
                         <div class="row">
                             <dt class="col-3">Accion: </dt>
-                            <dd class="col-9"> {{ $project->meta / $project->acciones }}</dd>
+                            <dd class="col-9" id="costo"> {{ $project->meta / $project->acciones }}</dd>
 
+                            <dt class="col-3">Monto: </dt>
+                            <dd class="col-9" id="monto"> 0</dd>
+                            
                             <dt class="col-3">Comisión: </dt>
-                            <dd class="col-9"> {{ ($project->meta / $project->acciones) * 0.05 }}</dd>
+                            <dd class="col-9" id="comision"> 0 </dd>
 
                             <dt class="col-3">IVA Comisión: </dt>
-                            <dd class="col-9"> {{ ($project->meta / $project->acciones) * 0.16 }}</dd>
-
-
+                            <dd class="col-9" id="iva"> 0 </dd>
                         </div>
 
                         <hr />
                         <div class="mb-3">
                             <span class="text-muted">Total = </span>
-                            <span class="h5">
-                                {{ ($project->meta / $project->acciones) * 0.05 + ($project->meta / $project->acciones) * 0.16 + $project->meta / $project->acciones}}</span>
+                            <span class="h5" id="resultado"> 0 </span>
                         </div>
 
                         <a href="#" class="btn btn-primary shadow-0 mt-5"> <i class="me-1 fa fa-shopping-basket"></i>
