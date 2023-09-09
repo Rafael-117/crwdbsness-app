@@ -73,13 +73,13 @@
 
                         <div class="row">
                             <dt class="col-3">Accion: </dt>
-                            <dd class="col-9"> {{ $project->meta / 100 }}</dd>
+                            <dd class="col-9"> {{ $project->meta / $project->acciones }}</dd>
 
                             <dt class="col-3">Comisión: </dt>
-                            <dd class="col-9"> {{ ($project->meta / 100) * 0.05 }}</dd>
+                            <dd class="col-9"> {{ ($project->meta / $project->acciones) * 0.05 }}</dd>
 
                             <dt class="col-3">IVA Comisión: </dt>
-                            <dd class="col-9"> {{ ($project->meta / 100) * 0.16 }}</dd>
+                            <dd class="col-9"> {{ ($project->meta / $project->acciones) * 0.16 }}</dd>
 
 
                         </div>
@@ -88,7 +88,7 @@
                         <div class="mb-3">
                             <span class="text-muted">Total = </span>
                             <span class="h5">
-                                {{ ($project->meta / 100) * 0.05 + ($project->meta / 100) * 0.16 + $project->meta / 100 }}</span>
+                                {{ ($project->meta / $project->acciones) * 0.05 + ($project->meta / $project->acciones) * 0.16 + $project->meta / $project->acciones}}</span>
                         </div>
 
                         <a href="#" class="btn btn-primary shadow-0 mt-5"> <i class="me-1 fa fa-shopping-basket"></i>
@@ -134,6 +134,11 @@
                                 <a class="nav-link d-flex align-items-center justify-content-center w-100" id="ex1-tab-4"
                                     data-mdb-toggle="pill" href="#ex1-pills-4" role="tab"
                                     aria-controls="ex1-pills-4" aria-selected="false">Capitalización</a>
+                            </li>
+                            <li class="nav-item d-flex" role="presentation">
+                                <a class="nav-link d-flex align-items-center justify-content-center w-100" id="ex1-tab-5"
+                                    data-mdb-toggle="pill" href="#ex1-pills-5" role="tab"
+                                    aria-controls="ex1-pills-5" aria-selected="false">Evaluación Financiera</a>
                             </li>
 
 
@@ -188,35 +193,78 @@
                                 aria-labelledby="ex1-tab-1">
                                 <div class="row col-12 my-5 d-flex align-items-start">
                                     <div class="grid-container">
-                                        <div class="item"><small class="text-secondary">Valor pre-inversión </small>
-                                            <span class="text-primary text-center">
-                                                {{ $project->valor_inicial }}</span>
+                                        <div class="item">
+                                            <span class="text-secondary">Valor pre-inversión </span>
+                                            <span class="font-weight-bold">$ {{ $project->valor_inicial }}</span>
                                         </div>
-                                        <div class="item"> <span class="text-secondary">Valor post - inversión</span>
-                                            <span class="text-primary text-center">{{ $project->valor_final }}</span>
+                                        <div class="item">
+                                            <span class="text-secondary">Valor post - inversión</span>
+                                            <span class="font-weight-bold">$ {{ $project->valor_final }}</span>
                                         </div>
-                                        <div class="item"> <span class="text-secondary">Rendimiento estimado total
-                                                anual</span>
-                                            <span class="text-primary text-center"> {{ $project->rendimiento }} </span>
+                                        <div class="item">
+                                            <span class="text-secondary">Rendimiento estimado total anual</span>
+                                            <span class="font-weight-bold"> {{ $project->rendimiento }} %</span>
                                         </div>
-                                        <div class="item"> <span class="text-secondary">Pagos estimados anual</span>
-                                            <span class="text-center"><a href="{{ $project->pagos }}"
-                                                    class="no-a text-primary">Visitar
-                                                    web</a>
+                                        <div class="item">
+                                            <span class="text-secondary">Pagos estimados anual</span>
+                                            <span class="font-weight-bold">{{ $project->periodo_pago }}</span>
+                                        </div>
+                                        <div class="item">
+                                            <span class="text-secondary">Meta de inversión</span>
+                                            <span class="font-weight-bold">{{ $project->meta }}</span>
+                                        </div>
+                                        <div class="item">
+                                            <span class="text-secondary">Tipo de pago anticipado</span>
+                                            <span class="font-weight-bold">Rendimiento {{ $project->periodo_pago }}</span>
+                                        </div>
+                                        <div class="item">
+                                            <span class="text-secondary">Oferta accionaria</span>
+                                            <span class="font-weight-bold">{{ $project->oferta_accionaria }}</span>
+                                        </div>
+                                        <div class="item">
+                                            <span class="text-secondary">Monto de financiamiento</span>
+                                            <span class="font-weight-bold">{{ $project->monto_financiamiento }}</span>
+                                        </div>
+                                        <div class="item">
+                                            <span class="text-secondary">Cantidad total de acciones</span>
+                                            <span class="font-weight-bold">{{ $project->acciones }}</span>
+                                        </div>
+                                        <div class="item">
+                                            <span class="text-secondary">Valor de la acción</span>
+                                            <span class="font-weight-bold">{{ ($project->meta/ $project->acciones) }}</span>
+                                        </div>
+                                        <div class="item">
+                                            <span class="text-secondary">Calificación de riesgos</span>
+                                            <span class="font-weight-bold">
+                                                {{ $project->riesgo }}
+                                                @php
+                                                    $riesgo = intval(str_replace('%', '', $project->riesgo));
+                                                @endphp
+                                                @switch(true)
+                                                    @case ($riesgo >= 100)
+                                                    <span class="text-primary">Sin riesgo de inversión</span>
+                                                    @break
+                                                    @case ($riesgo <= 90)
+                                                    <span class="text-success">Riesgo Bajo</span>
+                                                    @break
+                                                    @case ($riesgo <= 80)
+                                                    <span class="text-warning">Riesgo Medio</span>
+                                                    @break
+                                                    @case ($riesgo <= 50)
+                                                    <span class="text-danger">Riesgo Alto</span>
+                                                    @break
+                                                @endswitch
                                             </span>
+
                                         </div>
-                                        <div class="item">5</div>
-                                        <div class="item">6</div>
-                                        <div class="item">7</div>
-                                        <div class="item">8</div>
-                                        <div class="item">9</div>
-                                        <div class="item">10</div>
-                                        <div class="item">11</div>
-                                        <div class="item">12</div>
+                                        <div class="item">
+                                            <span class="text-secondary">Porcentaje de riesgos</span>
+                                            <span class="font-weight-bold">{{ $project->rendimiento }}</span>
+                                        </div>
                                     </div>
 
 
-                                
+
 
                                 </div>
 
@@ -270,17 +318,40 @@
                                     </div>
                                 </div>
 
-
-
-
-
-
-
-
                             </div>
 
                             <div class="tab-pane fade mb-2" id="ex1-pills-4" role="tabpanel"
                                 aria-labelledby="ex1-tab-4">
+
+
+                                <div class="shadow rounded mt-4 p-3">
+                                    <div class="card-body descriptions">
+                                        {!! json_decode($project->capitalizacion)->pymesrr !!}
+                                    </div>
+                                </div>
+
+                                <div class="shadow rounded mt-4 p-3">
+                                    <div class="card-body descriptions">
+                                        {!! json_decode($project->capitalizacion)->caracteristicas !!}
+                                    </div>
+                                </div>
+
+                                <div class="shadow rounded mt-4 p-3">
+                                    <div class="card-body descriptions">
+                                        {!! json_decode($project->capitalizacion)->beneficios !!}
+                                    </div>
+                                </div>
+
+                                <div class="shadow rounded mt-4 p-3">
+                                    <div class="card-body descriptions">
+                                        {!! json_decode($project->capitalizacion)->restricciones !!}
+                                    </div>
+                                </div>
+
+                            </div>
+
+                            <div class="tab-pane fade mb-2" id="ex1-pills-5" role="tabpanel"
+                                aria-labelledby="ex1-tab-5">
                                 @foreach (json_decode($project->evaluacion_financiera) as $evaluacion)
                                     <img src="{{ $evaluacion }}" class="img-fluid">
                                 @endforeach
@@ -296,18 +367,16 @@
                         <div class="card" style="width: 100%;">
                             <div class="card-body">
                                 <h5 class="card-title">Documentos</h5>
-
                                 <ul class="list-unstyled mb-0">
-                                    <a href="https://s3-us-west-2.amazonaws.com/oregon-snowball-img/images/proyectos/573/62688f6b113ff_pitchdeck.pdf"
-                                        class="no-a text-primary">
-                                        <li><i class="fas fa-file mx-3"></i>
-                                            Resumen Ejecutivo</li>
-                                    </a>
-                                    <a href="https://s3-us-west-2.amazonaws.com/oregon-snowball-img/images/proyectos/610/630ec33522d7d_viabilidad_financiera.pdf"
-                                        class="no-a text-primary">
-                                        <li><i class="fas fa-file mx-3"></i>
-                                            Viabilidad Financiera</li>
-                                    </a>
+
+                                    @foreach (json_decode($project->adjuntos) as $item)
+                                        <a href="{{ $item->adjunto }}" class="no-a text-primary">
+                                            <li><i class="fas fa-file mx-3"></i>
+                                                {{ $item->nombre_archivo }}</li>
+                                        </a>
+                                    @endforeach
+
+
                                 </ul>
 
 

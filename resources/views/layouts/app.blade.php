@@ -36,14 +36,14 @@
     <!-- Navbar Start -->
     <nav class="navbar navbar-expand-lg navbar-light fixed-top py-lg-0 px-4 px-lg-5 fadeIn" data-wow-delay="0.1s">
         <a href="{{ url('/') }}" class="navbar-brand d-block d-lg-none">
-            <img src="img/logo.png" width="40px" alt="">
+            <img src="../img/logo.png" width="40px" alt="">
         </a>
         <button type="button" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
             <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse justify-content-between py-4 py-lg-0" id="navbarCollapse">
             <a href="{{ url('/') }}" class="navbar-brand py-3 px-4 mx-3 d-none d-lg-block">
-                <img src="img/logo.png" width="70px" alt="">
+                <img src="../img/logo.png" width="70px" alt="">
                 <div class="navbar-nav ms-auto py-0">
                     <a href="#home" class="nav-item nav-link active">Inicio</a>
                     <a href="#about" class="nav-item nav-link">Nosotros</a>

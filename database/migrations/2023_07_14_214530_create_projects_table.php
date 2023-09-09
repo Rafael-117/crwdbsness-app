@@ -14,30 +14,35 @@ return new class extends Migration
         Schema::create('projects', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('companie_id');
-            $table->string('nombre');
-            $table->text('descripcion');
+            $table->unsignedBigInteger('user_id');
+            $table->string('nombre')->nullable();
+            $table->text('descripcion')->nullable();
             $table->string('estado')->nullable();
-            $table->json('responsables');
-            $table->double('valor_inicial', 20, 2);
+            $table->json('responsables')->nullable();
+            $table->double('valor_inicial', 20, 2)->nullable();
             $table->double('valor_final', 20, 2)->nullable();
             $table->double('valor_actual', 20, 2)->nullable();
-            $table->double('meta', 20, 2);
+            $table->double('meta', 20, 2)->nullable();
+            $table->string('meta_minima')->nullable();
             $table->string('riesgo')->nullable();
             $table->string('rendimiento')->nullable();
             $table->mediumInteger('acciones')->nullable();
             $table->string('pagos')->nullable();
             $table->string('periodo_pago')->nullable();
-            $table->json('informacion_proyecto');
-            $table->json('campaña_comercial');
-            $table->json('capitalizacion');
-            $table->json('evaluacion_financiera');
-            $table->string('logo_url');
-            $table->string('portada_url');
+            $table->string('oferta_accionaria')->nullable();
+            $table->string('monto_financiamiento')->nullable();
+            $table->json('informacion_proyecto')->nullable();
+            $table->json('campaña_comercial')->nullable();
+            $table->json('capitalizacion')->nullable();
+            $table->json('evaluacion_financiera')->nullable();
+            $table->string('logo_url')->nullable();
+            $table->string('portada_url')->nullable();
             $table->string('ubicacion')->nullable();
-            $table->string('editable');
-            $table->string('status');
+            $table->json('adjuntos')->nullable();
+            $table->string('status')->nullable();
             $table->timestamps();
             $table->foreign('companie_id')->references('id')->on('companies');
+            $table->foreign('user_id')->references('id')->on('users');
         });
     }
 

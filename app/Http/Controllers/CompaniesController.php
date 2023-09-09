@@ -22,7 +22,6 @@ class CompaniesController extends Controller
     public function index()
     {
         $id= Auth::user()->id; 
-
             $companies= DB::table('companies')
             ->join('sectors', 'companies.sector', '=', 'sectors.id')
             ->select('companies.id', 'companies.nombre','companies.rfc','companies.status','companies.encargado','companies.logo_url','sectors.sector',)
@@ -41,9 +40,6 @@ class CompaniesController extends Controller
         return view('dashboard.companies.empresas', ['companies'=> $companies, 'info'=>$info]);
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
     public function create()
     {
        $options = Sectors::all();
@@ -56,13 +52,11 @@ class CompaniesController extends Controller
         return view('dashboard.companies.crear-empresa', ['info'=>$info, 'options'=>$options, 'formRoute'=>'guardar.empresa']);
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
+   
     public function store(Request $request)
     {
-
-            try {
+            try 
+            {
                 $validator = Validator::make($request->all(), [
                 'nombre' => 'required|string|max:255',
                 'razon' => 'required|string|max:255',
@@ -113,22 +107,21 @@ class CompaniesController extends Controller
                     'estado' => $request->estado,
                     'pais' => $request->pais,
                     'logo_url' => $request->hasfile('picture') ? '/' . $url : 'dashboard/assets/img/company.jpg',
-                    'status' => 'Activa',
-                ];
+                    'status' => 'Activa'];
 
                 DB::table('companies')->insert($companyData);
                 return redirect('/empresas')->with('success', 'Registro actualizado correctamente');
 
-            
-            } catch (QueryException $e) {
+            } catch (QueryException $e) 
+            {
                         return redirect('empresa/'.$id)
                             ->with('msg-error', 'Error en la consulta: ' . $e->getMessage())
                             ->withInput();
-                    } catch (\Exception $e) {
+            } catch (\Exception $e) {
                         return redirect('empresa/'.$id)
                             ->with('msg-error', 'Error en el proceso: ' . $e->getMessage())
                             ->withInput();
-                    }
+            }
     }
 
 

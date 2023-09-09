@@ -3,13 +3,12 @@
     <div class="col-12 mt-5">
         <div class="card">
             <div class="card-body">
-                <form action="{{ route($formRoute, $project->id ?? '') }}" method="POST" enctype="multipart/form-data"
-                    >
+                <form action="{{ route($formRoute, $project ?? '') }}" method="POST" enctype="multipart/form-data">
                     @csrf
                     @method($method ?? '')
                     <div class="tab-content" id="pills-tabContent">
 
-                        {{-- select de emoresas --}}
+                        {{-- select de empresas --}}
                         <div class="tab-pane">
                             <h4 class="card-title mb-5">EMPRESA EN LA CUAL SE DESARROLLARA EL PROYECTO</h4>
                             <div class="row d-flex justify-content-around">
@@ -19,16 +18,19 @@
                                     <div class="form-group form-floating-label">
                                         <select class="form-control input-border-bottom" id="companie_id" name="companie_id"
                                             required="">
+
                                             <option value="">&nbsp;</option>
+                                            {{ $select = $project->companie_id ?? '' }}
                                             @foreach ($companies as $companie)
-                                                {{ $selec = $proyect->companie_id ?? '' }}
-                                                @if ($selec == $companie->id)
+                                                @if ($select == $companie->id)
                                                     <option value="{{ $companie->id }}" selected>{{ $companie->nombre }}
                                                     </option>
                                                 @else
                                                     <option value="{{ $companie->id }}">{{ $companie->nombre }}</option>
                                                 @endif
                                             @endforeach
+
+
                                         </select>
 
                                         <label for="companie_id" class="placeholder">Selecciona tu empresa</label>
@@ -44,7 +46,7 @@
                             <div class="row d-flex justify-content-around container px-0 mx-0">
 
                                 <div class="card-header header-bg mb-5" id="portada_img"
-                                    style="background-image: url('https://img.freepik.com/vector-premium/fondo-geometrico-azul-abstracto-triangulos_41606-322.jpg')">
+                                    style="background-image: url({{ $project->portada_url ?? 'https://img.freepik.com/vector-premium/fondo-geometrico-azul-abstracto-triangulos_41606-322.jpg' }})">
 
 
                                     <div class="profile-picture">
@@ -94,16 +96,49 @@
                             <h4 class="card-title mb-5">RESPONSABLE/S DEL PROYECTO </h4>
                             <div class="row d-flex justify-content-around">
                                 <button class="btn btn-primary btn-round mt-5 mb-5" id="btn-agregar-responsable"> <i
-                                    class="fa fa-plus"></i> Añadir Responsable</button>
-
-
+                                        class="fa fa-plus"></i> Añadir Responsable</button>
                                 <div class="col-12 mt-4">
-                                   
                                     <div class="col-md-12 row d-flex align-items-center responsables">
-                                        <div class="col-md-12">
-                                            <x-inputForm titulo="Responsable" nombre="responsables[]"
-                                                valor="{{ $project->responsables ?? '' }}" />
-                                        </div>
+
+
+                                        @if ($project->responsables ?? false)
+                                            @foreach (json_decode($project->responsables) ?? '' as $key => $value)
+                                                @if ($key >= 1)
+                                                    <div class="col-md-12 row d-flex align-items-center responsables">
+                                                        <div class="col-md-10">
+                                                            <div class="form-group form-floating-label">
+                                                                <input id="responsable_{{ $key }}" type="text"
+                                                                    class="form-control input-border-bottom" required=""
+                                                                    name="responsables[]" value="{{ $value ?? '' }}">
+                                                                <label for="responsable_{{ $key }}"
+                                                                    class="placeholder">Nuevo responsable:</label>
+                                                            </div>
+                                                        </div>
+                                                        <button type="button"
+                                                            class="btn-eliminar-responsable btn btn-danger btn-round "> <i
+                                                                class="fa fa-trash"></i> Eliminar </button>
+                                                    </div>
+                                                @else
+                                                    <div class="col-md-12">
+                                                        <x-inputForm titulo="Responsable" nombre="responsables[]"
+                                                            valor="{{ $value ?? '' }}" />
+                                                    </div>
+                                                @endif
+                                            @endforeach
+                                        @else
+                                            <div class="col-md-12">
+                                                <x-inputForm titulo="Responsable" nombre="responsables[]"
+                                                    valor="{{ $value ?? '' }}" />
+                                            </div>
+                                        @endif
+
+
+
+
+
+
+
+
                                     </div>
 
                                 </div>
@@ -114,29 +149,73 @@
                         <div class="tab-pane">
                             <h4 class="card-title mb-5">VALOR DEL PROYECTO</h4>
                             <div class="row d-flex justify-content-around">
-                                <div class="col-md-6">
-                                    <x-inputForm titulo="$ Valor actual de tu proyecto" nombre="valor_inicial"
-                                        valor="{{ $project->valor_inicial ?? '' }}" />
+                                <div class="col-md-6 mt-5">
+                                    <x-inputForm titulo="Valor actual de tu proyecto" nombre="valor_inicial"
+                                        valor="{{ $project->valor_inicial ?? '' }}" type="number" />
                                 </div>
-                                <div class="col-md-6">
-                                    <x-inputForm titulo="$ Meta esperada" nombre="meta"
-                                        valor="{{ $project->meta ?? '' }}" />
+
+                                <div class="col-md-6 mt-5">
+                                    <x-inputForm titulo="Meta esperada" nombre="meta"
+                                        valor="{{ $project->meta ?? '' }}" type="number" />
+                                </div>
+
+                                <div class="col-md-6 mt-5">
+                                    <x-inputForm titulo="Meta minima" nombre="meta_minima"
+                                        valor="{{ $project->meta_minima ?? '' }}" type="number" />
+                                </div>
+
+                                <div class="col-md-6 mt-5">
+                                    <x-inputForm titulo="Rendimiento estimado total anual" nombre="rendimiento"
+                                        valor="{{ $project->rendimiento ?? '0% - 0%' }}" />
+                                </div>
+
+                                <div class="col-md-6 mt-5">
+                                    <x-inputForm titulo="Pagos estimados anual" nombre="pago"
+                                        valor="{{ $project->pagos ?? '0% - 0%' }}" />
+                                </div>
+
+                                <div class="col-md-6 mt-5">
+                                    <div class="form-group form-floating-label">
+                                        <select class="form-control input-border-bottom" name="periodo_pago"
+                                            id="selectFloatingLabel" required="">
+                                            <option>&nbsp;</option>
+
+                                            <option value="Semanal"
+                                                {{ $project->periodo_pago ?? '' == 'Semanal' ? 'selected' : '' }}>Semanal
+                                            </option>
+                                            <option value="Mensual"
+                                                {{ $project->periodo_pago ?? '' == 'Mensual' ? 'selected' : '' }}>Mensual
+                                            </option>
+                                            <option value="Bimestral"
+                                                {{ $project->periodo_pago ?? '' == 'Bimestral' ? 'selected' : '' }}>
+                                                Bimestral
+                                            </option>
+                                            <option value="Semestral"
+                                                {{ $project->periodo_pago ?? '' == 'Semestral' ? 'selected' : '' }}>
+                                                Semestral
+                                            </option>
+                                            <option value="Anual"
+                                                {{ $project->periodo_pago ?? '' == 'Anual' ? 'selected' : '' }}>Anual
+                                            </option>
+                                        </select>
+                                        <label for="selectFloatingLabel" class="placeholder">Periodo de pagos
+                                            estimados</label>
+                                    </div>
+                                </div>
+
+                                <div class="col-md-6 mt-5">
+                                    <x-inputForm titulo="Oferta accionaria" nombre="oferta_accionaria"
+                                        valor="{{ $project->oferta_accionaria ?? '0%' }}" />
+                                </div>
+
+                                <div class="col-md-6 mt-5">
+                                    <x-inputForm titulo="Monto de financiamiento" nombre="monto_financiamiento"
+                                        valor="{{ $project->monto_financiamiento ?? '' }}" type="number" />
                                 </div>
 
 
 
-                                <div class="col-md-12 mt-5" >
-                                    <x-inputForm titulo="% Rendimiento estimado total anual" nombre="rendimiento"
-                                        valor="{{ $project->rendimiento ?? '' }}" />
-                                </div>
-                                <div class="col-md-6">
-                                    <x-inputForm titulo="% Pagos estimados anual" nombre="pago"
-                                        valor="{{ $project->pago ?? '' }}" />
-                                </div>
-                                <div class="col-md-6">
-                                    <x-inputForm titulo="Periodo de pagos estimados" nombre="periodo_pago"
-                                        valor="{{ $project->periodo_pago ?? '' }}" />
-                                </div>
+
 
 
                             </div>
@@ -151,8 +230,12 @@
                                     <div class="row row-editor">
                                         <div class="editor-container col-12">
                                             <textarea class="form-control editor" name="informacion_proyecto[prob]">
-                                            {{ $project->descripcion ?? (old('editor') ?? 'PROBLEMA Y SOLUCIÓN:') }}
-                                        </textarea>
+                                                @if(isset($project) && isset($project->informacion_proyecto))
+                                                {{ json_decode($project->informacion_proyecto)->prob ?? (old('informacion_proyecto.prob') ?? 'PROBLEMA Y SOLUCIÓN:') }}
+                                                @else
+                                                PROBLEMA Y SOLUCIÓN:
+                                                @endif
+                                            </textarea>
                                         </div>
                                     </div>
                                 </div>
@@ -161,8 +244,12 @@
                                     <div class="row row-editor">
                                         <div class="editor-container col-12">
                                             <textarea class="form-control editor" name="informacion_proyecto[prod]">
-                                            {{ $project->descripcion ?? (old('editor') ?? 'PRODUCTO / SERVICIO:') }}
-                                        </textarea>
+                                                @if(isset($project) && isset($project->informacion_proyecto))
+                                                {{ json_decode($project->informacion_proyecto)->prod ?? (old('informacion_proyecto.prod') ?? 'PRODUCTO / SERVICIO:') }}
+                                                @else
+                                                PRODUCTO / SERVICIO:
+                                                @endif
+                                             </textarea>
                                         </div>
                                     </div>
                                 </div>
@@ -171,8 +258,12 @@
                                     <div class="row row-editor">
                                         <div class="editor-container col-12">
                                             <textarea class="form-control editor" name="informacion_proyecto[merc]">
-                                            {{ $project->descripcion ?? (old('editor') ?? 'MERCADO:') }}
-                                        </textarea>
+                                                @if(isset($project) && isset($project->informacion_proyecto))
+                                                {{ json_decode($project->informacion_proyecto)->merc ?? (old('informacion_proyecto.merc') ?? 'MERCADO:') }}
+                                                @else
+                                                MERCADO:
+                                                @endif
+                                             </textarea>
                                         </div>
                                     </div>
                                 </div>
@@ -181,8 +272,12 @@
                                     <div class="row row-editor">
                                         <div class="editor-container col-12">
                                             <textarea class="form-control editor" name="informacion_proyecto[comp]">
-                                            {{ $project->descripcion ?? (old('editor') ?? 'COMPETENCIA:') }}
-                                        </textarea>
+                                                @if(isset($project) && isset($project->informacion_proyecto))
+                                                {{ json_decode($project->informacion_proyecto)->comp ?? (old('informacion_proyecto.comp') ?? 'COMPETENCIA:') }}
+                                                @else
+                                                COMPETENCIA:
+                                                @endif
+                                            </textarea>
                                         </div>
                                     </div>
                                 </div>
@@ -191,8 +286,12 @@
                                     <div class="row row-editor">
                                         <div class="editor-container col-12">
                                             <textarea class="form-control editor" name="informacion_proyecto[log]">
-                                            {{ $project->descripcion ?? (old('editor') ?? 'LOGROS O HITOS:') }}
-                                        </textarea>
+                                                @if(isset($project) && isset($project->informacion_proyecto))
+                                                {{ json_decode($project->informacion_proyecto)->log ?? (old('informacion_proyecto.log') ?? 'LOGROS O HITOS:') }}
+                                                @else
+                                                LOGROS O HITOS:
+                                                @endif
+                                             </textarea>
                                         </div>
                                     </div>
                                 </div>
@@ -201,8 +300,12 @@
                                     <div class="row row-editor">
                                         <div class="editor-container col-12">
                                             <textarea class="form-control editor" name="informacion_proyecto[rec]">
-                                            {{ $project->descripcion ?? (old('editor') ?? 'USO DE RECURSOS:') }}
-                                        </textarea>
+                                                @if(isset($project) && isset($project->informacion_proyecto))
+                                                {{ json_decode($project->informacion_proyecto)->rec ?? (old('informacion_proyecto.rec') ?? 'USO DE RECURSOS:') }}
+                                                @else
+                                                USO DE RECURSOS:
+                                                @endif
+                                            </textarea>
                                         </div>
                                     </div>
                                 </div>
@@ -222,7 +325,6 @@
                                 <span>Convierte tus documentos en imagenes <b>png o jpg</b> </span>
                             </div>
                             <div class="row d-flex justify-content-around">
-
                                 <div class="upload__box d-flex flex-column align-content-center align-items-center">
                                     <div class="upload__btn-box">
                                         <label class="btn btn-primary btn-round text-white"><i class="fas fa-images"></i>
@@ -231,7 +333,20 @@
                                                 data-max_length="20" class="upload__inputfile" name="camp[]">
                                         </label>
                                     </div>
-                                    <div class="upload__img-wrap row"></div>
+                                    <div class="upload__img-wrap row">
+
+                                        @if ($project->campaña_comercial ?? '')
+                                            @foreach (json_decode($project->campaña_comercial) as $key => $value)
+                                                <div class="upload__img-box">
+                                                    <div style="background-image: url({{$value }})"
+                                                        data-number="{{ $key }}" data-file="{{ $value }}" class="img-bg">
+                                                        <div class="upload__img-close"></div>
+                                                    </div>
+                                                    <input type="hidden" name="old_camp[]" value="{{$value }}">
+                                                </div>
+                                            @endforeach
+                                        @endif
+                                    </div>
                                 </div>
 
                             </div>
@@ -261,9 +376,58 @@
                                                 data-max_length="20" class="upload__inputfile" name="valuacion[]">
                                         </label>
                                     </div>
-                                    <div class="upload__img-wrap row"></div>
+                                    <div class="upload__img-wrap row">
+
+                                        @if ($project->evaluacion_financiera ?? '')
+                                        @foreach (json_decode($project->evaluacion_financiera) as $key => $value)
+                                            <div class="upload__img-box">
+                                                <div style="background-image: url({{ $value }})"
+                                                    data-number="{{ $key }}" data-file="{{ $value }}" class="img-bg">
+                                                    <div class="upload__img-close"></div>
+                                                </div>
+                                                <input type="hidden" name="old-evaluacion[]" value="{{$value}}">
+                                            </div>
+                                        @endforeach
+                                    @endif
+
+
+                                    </div>
                                 </div>
 
+                            </div>
+                        </div>
+
+                        {{-- Adjuntos --}}
+                        <div class="tab-pane" id="inputs-container">
+                            <h4 class="card-title mb-5">Adjuntos</h4>
+                            <div class="row d-flex flex-column">
+                                <p class="mt-5 text-center">
+                                    <label for="attachment">
+                                        <a class="btn btn-primary text-light" role="button" aria-disabled="false">+
+                                            Add</a>
+                                    </label>
+                                    <input type="file" name="adjuntos[]" accept=".pdf" id="attachment"
+                                        style="visibility: hidden; position: absolute;" multiple />
+                                </p>
+                                <div id="files-area" class="list-files">
+                                    <div id="filesList">
+                                        <div id="files-names">
+
+                                            @if ($project->adjuntos ?? '')
+                                            @foreach (json_decode($project->adjuntos) as $adjunto)
+                                               
+                                            <div class="file-block"><span class="file-delete"><span>+</span></span><span
+                                                class="name">{{ $adjunto->nombre_archivo}}</span>
+                                                <input type="text"
+                                                class="name-input form-control input-solid"
+                                                placeholder="Nombre del archivo" name="old_nombrearchivo[]" value="{{ $adjunto->nombre_archivo }}">
+                                                <input type="hidden" name="old_adjuntos[]" value="{{$adjunto->adjunto}}">
+                                            </div>
+                                            @endforeach
+                                        @endif
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                         </div>
 
@@ -273,11 +437,10 @@
                             <div class="row d-flex justify-content-around mb-5">
 
                                 <div class="col-md-12">
-                                    <x-inputForm titulo="Ubicacion ciudad y estado" nombre="ubicacion" valor="{{ $project->ubicacion ?? '' }}" />
+                                    <x-inputForm titulo="Ubicacion ciudad y estado" nombre="ubicacion"
+                                        valor="{{ $project->ubicacion ?? '' }}" />
                                 </div>
-
                             </div>
-
 
                             <div class="mt-5 text-center"><button class="btn btn-primary profile-button"
                                     type="submit">Guardar</button>
@@ -307,8 +470,6 @@
     @include('components.alerts')
     <script>
         $(document).ready(function() {
-
-
             // Función para agregar un nuevo campo de entrada de responsable
             function agregarResponsable() {
                 let contadorResponsables = $(".responsables").length + 1;
@@ -321,9 +482,8 @@
                                 <label for="responsable_${contadorResponsables}" class="placeholder">Nuevo responsable:</label>
                             </div>
                         </div>
-                        <div class="col-md-2">
-                        <button type="button" class="btn-eliminar-responsable btn btn-danger btn-round ">  <i class="fa fa-trash"></i> Eliminar </button>
-                    </div>
+                            <button type="button" class="btn-eliminar-responsable btn btn-danger btn-round ">  <i class="fa fa-trash"></i> Eliminar </button>
+                        
                 </div>`;
                 $("#responsables-container").append(nuevoResponsable);
             }
@@ -338,6 +498,14 @@
 
             // Delegación de eventos para los botones "Eliminar responsable" generados dinámicamente
             $(document).on("click", ".btn-eliminar-responsable", eliminarResponsable);
+
+
+
+
+
+
+
+
         });
     </script>
 @endsection

@@ -11,7 +11,7 @@
                 @foreach ($companies as $company)
                     <div class="col-md-4">
                         <div class="card card-profile" style="height: 400px;">
-                            <div class="card-header" style="background-image: url('/img/bg-company.jpg')">
+                            <div class="card-header" style="background-image: url('/img/bg-company.jpg');background-position: bottom;">
                                 <div class="profile-picture">
                                     <div class="avatar avatar-xl">
                                         <img src="{{ $company->logo_url ?? '/dashboard/assets/img/company.jpg' }}"

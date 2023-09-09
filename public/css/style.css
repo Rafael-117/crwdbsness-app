@@ -136,7 +136,7 @@ a.no-a {
 
 .navbar .navbar-nav .nav-link {
     padding: 20px 15px;
-    color: var(--light);
+    color: var(--secondary);
     font-size: 18px;
     font-weight: 600;
     outline: none;
@@ -1509,12 +1509,42 @@ h2.widget-title:after {
 
 .grid-container {
     display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    grid-template-rows: repeat(3, 1fr);
-    gap: 10px;
-}
-
-.item {
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: repeat(4, 1fr);
+    gap: 20px; /* You can adjust the gap between items as needed */
+  
+    /* Media Query for tablets (e.g., iPad) */
+    @media (max-width: 768px) {
+      grid-template-columns: repeat(2, 1fr);
+      grid-template-rows: repeat(6, 1fr);
+    }
+  
+    /* Media Query for mobile phones */
+    @media (max-width: 480px) {
+      grid-template-columns: repeat(1, 1fr);
+      grid-template-rows: repeat(12, 1fr);
+    }
+  }
+  
+  .item {
+    display: flex;
+    flex-direction: column;
     padding: 20px;
     text-align: center;
+    font-size: 18px;
+    justify-content: space-between;
+    background-color: white;
+  }
+  
+  .navbar-collapse{
+    width: 100vw;
+    padding: 40px;
+    color: var(--secondary);
+    
+}
+
+@media (max-width: 992px){
+    .navbar-collapse{
+    background-color: rgb(255, 255, 255);
+    }
 }

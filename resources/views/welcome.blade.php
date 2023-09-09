@@ -1,6 +1,5 @@
 @extends('layouts.app')
 @section('content')
-    
     {{-- <x-spiner></x-spiner> --}}
     <div class="static-slider1 py-4 containericons" id="home">
         <div class="bgg"></div>
@@ -45,11 +44,12 @@
                 <div class="col-lg-6"><img src="/img/emp.png" class="img-fluid" alt="wrapkit" /></div>
                 <div class="col-lg-6">
                     <div class="card-body">
-                        <h3 class="text-uppercase">¿Que es CRWDBSNESS?</h3>
-                        <p class="my-4">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Laborum ab dignissimos
-                            pariatur. Distinctio, pariatur ea commodi laudantium nihil eaque ipsum, repudiandae
-                            voluptatibus
-                            quas fugit temporibus, eos dolore neque cupiditate. Architecto!</p>
+                        <h3 class="text-uppercase">Acerca de Nosotros</h3>
+                        <p class="my-4">En CRWDBSNESS, nos apasiona impulsar la innovación y el crecimiento empresarial a
+                            través de la colaboración colectiva. Somos una plataforma de financiamiento colectivo que se
+                            dedica a conectar inversores visionarios con proyectos prometedores en una variedad de giros y
+                            sectores. Nuestro objetivo principal es democratizar la inversión y fomentar la diversificación
+                            para lograr los mejores rendimientos posibles para nuestros inversionistas.</p>
                         <!-- column  -->
 
                         <h4>Con nosotros puede encontrar</h4>
@@ -97,19 +97,38 @@
         <div class="container mt-5">
             <div class="row g-5">
                 <div class="col-lg-6 wow fadeInUp" data-wow-delay="0.1s">
-                    <div class="d-flex align-items-center mb-5">
+                    {{-- <div class="d-flex align-items-center mb-5">
                         <div class="years flex-shrink-0 text-center me-4">
                             <h1 class="display-1 mb-0">7</h1>
                             <h5 class="mb-0">Años</h5>
                         </div>
                         <h3 class="lh-base mb-0">De experiencia impulsando nuevas empresas</h3>
-                    </div>
-                    <h3>¿Por qué invertir con nosotros?
-                    </h3>
+                    </div> --}}
+                    <h2>¿Por qué invertir con nosotros?
+                    </h2>
                     <p class="mb-4">
-                        Porque somos una empresa comprometida con el crecimiento y la transparencia, es por ello que en
-                        cada uno de los proyectos involucramos capital propio y nuestros conocimientos, buscando siempre
-                        potenciar los resultados de las empresas.
+                        Invertir con CRWDBSNESS es una oportunidad única para aquellos que buscan un enfoque fresco y dinámico en el mundo de las inversiones. Aquí hay algunas razones por las cuales deberías considerar unirte a nuestra comunidad de inversionistas visionarios:
+                        <ul>
+                            <li> Diversificación Inteligente: Accede a proyectos en diversos sectores para construir una cartera
+                                balanceada que maximice el potencial de crecimiento y reduzca riesgos.</li>
+                            <li>Fomento de la Innovación: Respaldamos emprendedores audaces que están cambiando industrias,
+                                permitiéndote ser parte del progreso y evolución.</li>
+                            <li>Transparencia Total: Mantenemos una comunicación abierta y brindamos información clara sobre cada
+                                proyecto, asegurando que estés informado en todo momento.</li>
+                            <li>Participación en el Éxito: Al invertir, compartes las recompensas del éxito de las empresas
+                                respaldadas, siendo parte activa de su crecimiento.</li>
+                            <li>Comunidad de Visión: Únete a una red de inversores y emprendedores apasionados que comparten su
+                                conocimiento y perspectivas.</li>
+                        </ul>
+                       
+
+                        
+
+                        
+
+                        
+
+                        
                     </p>
                 </div>
                 <div class="col-lg-6 wow fadeInUp" data-wow-delay="0.5s">
@@ -166,45 +185,45 @@
     <!-- Team Start -->
     <div class="py-6 pb-5" id="proyects">
         <div class="container">
-            <div class="row mb-5 wow fadeInUp d-flex justify-content-center text-center" data-wow-delay="0.1s">
-                <h1 class="display-5 mb-0">Proyetos</h1>
-                <p class="spacing company-text text-center">Listado de nuestros ultimos proyectos que estan disponibles
-                    para invertir </p>
-
+            <div class="row mb-5 wow fadeInUp d-flex justify-content-center " data-wow-delay="0.1s">
+                <h1 class="display-5 mb-5 text-center">Proyetos</h1>
+                <p class="text-center" style="max-width: 700px"> 
+                    Explora nuestra lista de proyectos actuales para descubrir las oportunidades de inversión que ofrecemos. Desde startups disruptivas hasta proyectos de expansión bien establecidos, cada proyecto tiene su propia historia y potencial. Únete a nosotros en CRWDBSNESS y sé parte de la próxima generación de inversionistas que respaldan la innovación y el crecimiento empresarial.
+                </p>
             </div>
             <div class="row d-flex justify-content-center">
 
-                @foreach ($projects  as $project)
-                <div class="card card-company m-5">
-                    <div class="card-img" >
-                        <img class="card-img-top img-fluid" src="{{ $project->logo_url }}" alt="Card image cap" >
-                    </div>
-                    <div class="card-body">
-                        <h4 class="card-title">{{ $project->name }}</h4>
-                        <h6 class="card-subtitle">Exportadora de berries</h6>
-                        <p class="stars mb-3 mt-2"><i class="fas fa-star"></i><i class="fas fa-star"></i><i
-                                class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></p>
-                        <b class="card-text">Rendimiento Estimado</b>
-                        <span>de {{ $project->rendimiento }}% Anual</span>
-                        <div class="mb-4 mt-4">
-                            <div class="d-flex justify-content-between">
-                                <h6 class="font-weight-bold">{{ $project->meta }}</h6>
-                                <h6 class="font-weight-bold">0%</h6>
-                            </div>
-                            <div class="progress">
-                                <div class="progress-bar bg-primary" role="progressbar" aria-valuenow="0"
-                                    aria-valuemin="0" aria-valuemax="100" style="width: 0%;"></div>
-                            </div>
+                @foreach ($projects as $project)
+                    <div class="card card-company m-5">
+                        <div class="card-img">
+                            <img class="card-img-top img-fluid" src="{{ $project->logo_url }}" alt="Card image cap">
                         </div>
-                        <a href="{{ route('proyect',$project->id ) }}" class="btn btn-primary">aprender mas</a>
-                        <!-- <a href="" class="company-item rounded-end p-4"> Aprende mas
-                            <i class="fa fa-arrow-right fa-2x text-primary"></i>
-                        </a> -->
+                        <div class="card-body">
+                            <h4 class="card-title">{{ $project->name }}</h4>
+                            <h6 class="card-subtitle">Exportadora de berries</h6>
+                            <p class="stars mb-3 mt-2"><i class="fas fa-star"></i><i class="fas fa-star"></i><i
+                                    class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></p>
+                            <b class="card-text">Rendimiento Estimado</b>
+                            <span>de {{ $project->rendimiento }}% Anual</span>
+                            <div class="mb-4 mt-4">
+                                <div class="d-flex justify-content-between">
+                                    <h6 class="font-weight-bold">{{ $project->meta }}</h6>
+                                    <h6 class="font-weight-bold">0%</h6>
+                                </div>
+                                <div class="progress">
+                                    <div class="progress-bar bg-primary" role="progressbar" aria-valuenow="0"
+                                        aria-valuemin="0" aria-valuemax="100" style="width: 0%;"></div>
+                                </div>
+                            </div>
+                            <a href="{{ route('proyect', $project->id) }}" class="btn btn-primary">aprender mas</a>
+                            <!-- <a href="" class="company-item rounded-end p-4"> Aprende mas
+                                <i class="fa fa-arrow-right fa-2x text-primary"></i>
+                            </a> -->
 
+                        </div>
                     </div>
-                </div>
                 @endforeach
-                
+
 
             </div>
         </div>
@@ -215,8 +234,9 @@
     <div class="container-fluid bg-light my-5 py-6" id="service">
         <div class="container">
             <div class="row g-5 mb-5 wow fadeInUp" data-wow-delay="0.1s">
-                <div class="col-12 text-center">
+                <div class="col-12 text-center d-flex flex-colum row justify-content-center">
                     <h1 class="display-5 mb-0">Proyectos finalizados</h1>
+                    <p class=" text-center mt-4" style="max-width: 700px"> Nuestro objetivo es brindarte oportunidades emocionantes para invertir en ideas que tienen el potencial de generar un impacto significativo y un crecimiento sostenible.</p>
                 </div>
             </div>
             <div class="row g-5">
@@ -258,13 +278,17 @@
     <!-- Service End -->
 
     <section class="shop-banner">
-        <div class="container">
-            <h3 class="title">
-                Este año <br> incrementa tu dinero<br>
-                con grandes <span class="text-success-gradiant"> <br> oportunidades de inversion</span>
-            </h3>
-
-            <a href="#proyects" class="btn btn-primary btn-lg  mt-5">Ver Inversiones</a>
+        <div class="container mb-5" style="left: -300px;
+        width: 50%;
+        position: relative;
+        
+    ">
+            <h3 class="title text-success-gradiant">
+                Invierte en el Futuro 
+                <br> Hoy<br></h3>
+             <span >
+                ¿Estás listo para ser parte de algo más grande? En CRWDBSNESS, no solo estamos redefiniendo la inversión, estamos forjando el camino hacia el futuro. Si estás buscando oportunidades que superen los límites y generen rendimientos reales, estás en el lugar correcto.
+            </span>
         </div>
     </section>
 
@@ -289,12 +313,12 @@
         <div class="container">
             <blockquote>Hay poder inmenso cuando un grupo de personas con intereses similares se une para lograr las mismas
                 metas.
-            <span>&mdash; Idowu Koyenikan</span>
+                <span>&mdash; Idowu Koyenikan</span>
             </blockquote>
         </div>
     </section>
 
-    
+
     <!-- Testimonial Start -->
     <div class="container-fluid bg-light" id="testimonial">
         <div class="container-fluid py-5">
@@ -381,10 +405,11 @@
     <div class="container-xxl py-5" id="contact">
         <div class="container py-5">
             <div class="row g-5 mb-5 wow fadeInUp" data-wow-delay="0.1s">
-                <div class="col-12 text-center">
-                    <h1 class="display-5 mb-0">Trabajemos juntos</h1>
-                </div>
+                <div class="col-12 text-center d-flex flex-colum row justify-content-center ">
+                    <h1 class="display-5 mb-5 ">Trabajemos juntos</h1>
+                    <p style="max-width: 700px">¿Listo para dar el siguiente paso o tienes preguntas? Estamos aquí para ayudarte. No dudes en ponerte en contacto con nosotros a través de cualquiera de los siguientes medios. Nuestro equipo estará encantado de asistirte en lo que necesites.</p>
 
+                </div>
             </div>
             <div class="row g-5">
                 <div class="col-lg-5 col-md-6 wow fadeInUp" data-wow-delay="0.1s">

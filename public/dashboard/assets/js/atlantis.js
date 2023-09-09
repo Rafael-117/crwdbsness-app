@@ -269,10 +269,68 @@ const validar = (data) => {
 
 
 
+
+
+
 $(document).ready(function () {
 
     ImgUpload();
     
+    const dt = new DataTransfer(); // Permet de manipuler les fichiers de l'input file
+
+   
+$("#attachment").on('change', function(e){
+
+	
+
+    for (var i = 0; i < this.files.length; i++) {
+        let fileBloc = $('<div/>', { class: 'file-block' }),
+            fileName = $('<span/>', { class: 'name', text: this.files.item(i).name }),
+            nameInput = $('<input/>', { type: 'text', class: 'name-input form-control input-solid', placeholder: 'Nombre del archivo', name:"nombre_archivo[]"});
+        fileBloc.append('<span class="file-delete"><span>+</span></span>')
+            .append(fileName)
+            .append(nameInput);
+        $("#files-names").append(fileBloc);
+
+        // Agrega los archivos al objeto DataTransfer con su nombre personalizado
+        dt.items.add(new File([this.files[i]], nameInput.val()));
+    }
+
+
+	for (let file of this.files) {
+		dt.items.add(file);
+	}
+	
+	this.files = dt.files;
+
+	$('span.file-delete').click(function(){
+		let name = $(this).next('span.name').text();
+		// Supprimer l'affichage du nom de fichier
+		$(this).parent().remove();
+		for(let i = 0; i < dt.items.length; i++){
+			// Correspondance du fichier et du nom
+			if(name === dt.items[i].getAsFile().name){
+				// Suppression du fichier dans l'objet DataTransfer
+				dt.items.remove(i);
+				continue;
+			}
+		}
+		// Mise à jour des fichiers de l'input file après suppression
+		document.getElementById('attachment').files = dt.files;
+	});
+});
+
+
+
+
+
+
+
+
+
+
+
+
     $(".btn-refresh-card").on("click", function () {
         var e = $(this).parents(".card");
         e.length &&

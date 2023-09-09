@@ -12,9 +12,13 @@ class Transactions extends Model
         'project_id',
         'user_id',
         'num_acciones',
+        'precio_acccion',
         'monto',
+        'comision',
+        'impuestos',
+        'total',
         'tipo',
-        'status',
+        'status'
     ];
 
 }

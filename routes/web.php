@@ -35,6 +35,6 @@ Route::patch('actualizar-empresa/{id}', [App\Http\Controllers\CompaniesControlle
 Route::get('/proyectos', [App\Http\Controllers\ProjectsController::class, 'index'])->name('proyectos');
 Route::get('/crear-proyecto', [App\Http\Controllers\ProjectsController::class, 'create'])->name('crear.proyecto');
 Route::post('/guardar-proyecto', [App\Http\Controllers\ProjectsController::class, 'store'])->name('guardar.proyecto');
-Route::delete('/eliminar-proyecto/{id}', [App\Http\Controllers\ProjectsController::class, 'destroy'])->name('eliminar.proyecto');
-Route::get('/proyecto/{id}', [App\Http\Controllers\ProjectsController::class, 'show'])->name('editar.proyecto');
-Route::patch('actualizar-proyecto/{id}', [App\Http\Controllers\ProjectsController::class, 'update'])->name('actualizar.proyecto');
+Route::delete('/eliminar-proyecto/{project}', [App\Http\Controllers\ProjectsController::class, 'destroy'])->name('eliminar.proyecto');
+Route::get('/proyecto/{project}', [App\Http\Controllers\ProjectsController::class, 'show'])->name('editar.proyecto');
+Route::patch('actualizar-proyecto/{project}', [App\Http\Controllers\ProjectsController::class, 'update'])->name('actualizar.proyecto');

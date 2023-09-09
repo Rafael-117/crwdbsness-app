@@ -6144,6 +6144,18 @@ label {
   background: transparent !important;
 }
 
+/* Works for Chrome, Safari, Edge, Opera */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Works for Firefox */
+input[type="number"] {
+  -moz-appearance: textfield;
+}
+
 /*      Input File      */
 .input-file input[type="file"],
 .input-file .form-control,
@@ -6181,6 +6193,58 @@ label {
 .input-file.input-file-image img.img-upload-preview.img-circle {
   border-radius: 2000px;
 }
+
+#files-area {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 0 auto;
+}
+
+.file-block {
+  border-radius: 10px;
+    background-color: rgba(144, 163, 203, 0.2);
+    margin: 5px;
+    color: initial;
+    display: flex;
+    align-items: center;
+    flex-direction: row;
+    justify-content: space-between;
+    width: 500px;
+}
+.file-block > span.name {
+  padding-right: 10px;
+  width:200px !important;
+  display: inline-flex;
+}
+
+.file-block > input{
+  padding-right: 10px;
+  width:200px !important;
+  display: inline-flex;
+}
+
+.file-delete {
+  display: flex;
+  width: 24px;
+  color: initial;
+  background-color: #6eb4ff00;
+  font-size: large;
+  justify-content: center;
+  margin-right: 3px;
+  cursor: pointer;
+}
+.file-delete:hover {
+  background-color: rgba(144, 163, 203, 0.2);
+  border-radius: 10px;
+}
+.file-delete > span {
+  transform: rotate(45deg);
+}
+
+
+
+
 
 .form-control:disabled,
 .form-control[readonly] {
@@ -14772,7 +14836,7 @@ a.btn {
 }
 
 .upload__img-close:after {
-  content: "✖";
+  content: "X";
   font-size: 14px;
   color: white;
 }
@@ -14783,4 +14847,10 @@ a.btn {
   background-size: cover;
   position: relative;
   padding-bottom: 100%;
+}
+
+.disabled{
+  background-color: lightslategrey;
+  pointer-events: none;
+  cursor: default;
 }

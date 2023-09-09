@@ -15,19 +15,19 @@
         const currentTabContent = tabContents[currentTab - 1];
         const inputs = currentTabContent.querySelectorAll('input');
         for (const input of inputs) {
-            if (input.type !='file' ) {
+            if (input.type != 'file') {
                 console.log(input)
                 if (!input.value.trim()) {
-                Swal.fire({
-                    icon: 'error',
-                    title: 'Por favor, complete todos los campos antes de cambiar de pestaña.',
-                    showConfirmButton: false,
-                    timer: 1500
-                })
-                return false;
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Por favor, complete todos los campos antes de cambiar de pestaña.',
+                        showConfirmButton: false,
+                        timer: 1500
+                    })
+                    return false;
+                }
             }
-            }
-           
+
         }
         return true;
     }
