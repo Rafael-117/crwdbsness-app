@@ -1563,3 +1563,6 @@ h2.widget-title:after {
     background-color: rgb(255, 255, 255);
     }
 }
+.btn-primary:focus {
+    box-shadow: none !important;
+}

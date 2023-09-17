@@ -7,7 +7,8 @@ use Illuminate\Http\Request;
 use App\Models\Projects;
 use App\Models\Companies;
 use App\Models\Sectors;
-
+use App\Models\Transactions;
+use Illuminate\Support\Facades\Auth;
 
 class HomeController extends Controller
 {
@@ -50,12 +51,47 @@ class HomeController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $project = Projects::where('id', $request->project_id)->get()->first();
+
+        $precio= ($project->meta / $project->acciones);
+        $monto= ($project->meta / $project->acciones)* $request->num_acciones;
+        $comision = ($monto*0.1);
+        $impuestos = ($comision*0.16);
+        $total = ($monto+ $comision + $impuestos);
+
+
+        $transaction = new Transactions;
+        $transaction->project_id=$request->project_id;
+        $transaction->user_id=Auth::id();
+        $transaction->num_acciones = $request->num_acciones;    
+        $transaction->precio_acccion=$precio;
+        $transaction->monto= $monto;
+        $transaction->comision= $comision;
+        $transaction->impuestos= $impuestos;
+        $transaction->total=$total;
+        $transaction->tipo="Compra";
+        $transaction->status="Pendiente";
+        $transaction->save();
+
+        return $transaction->id;
+
+       
     }
 
-    /**
-     * Display the specified resource.
-     */
+
+    public function mail(string $id)
+    {
+       
+    $transactions = Transactions::where('id', $id)->get()->first();
+    $project = Projects::where('id', $transactions->project_id)->get()->first();
+
+    return view('mail', [
+        'project' => $project,
+        'transaction' => $transactions,
+    ]);
+    }
+
+
     public function show(string $id)
     {
         //

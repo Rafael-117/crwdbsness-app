@@ -16,8 +16,8 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('welcome');
 Route::get('proyect/{id}', [App\Http\Controllers\HomeController::class, 'proyect'])->name('proyect');
-
-
+Route::post('/comprar-proyecto', [App\Http\Controllers\HomeController::class, 'store'])->name('comprar.proyecto');
+Route::get('mail/{id}', [App\Http\Controllers\HomeController::class, 'mail'])->name('mail');
 
 Auth::routes();
 Route::get('/home', [App\Http\Controllers\DashboardController::class, 'home'])->name('home');

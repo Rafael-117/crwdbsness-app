@@ -24,83 +24,93 @@
 
     <!-- content -->
     <section class="py-5">
-        <div class="container">
-            <div class="row gx-5">
-                <aside class="col-lg-6">
-                    <div class="border rounded-4 mb-3 d-flex justify-content-center">
-                        <img style="max-width: 100%; max-height: 100vh; margin: auto;" class="rounded-4 fit"
-                            src="{{ $project->logo_url }}" />
-                    </div>
-                    <!-- thumbs-wrap.// -->
-                    <!-- gallery-wrap .end// -->
-                </aside>
-                <main class="col-lg-6">
-                    <div class="ps-lg-3">
-                        <h4 class="text-dark">
-                            {{ $project->nombre }}
-                        </h4>
-                        <span>Empaque de berries</span>
-                        <div class="d-flex flex-row my-3">
-                            <div class="text-warning mb-1 me-2">
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star"></i>
-                                <span class="ms-1">
-                                    5
-                                </span>
-                            </div>
-                            <span class="text-muted"><i class="fas fa-chart-pie fa-sm mx-1"></i>{{ $project->acciones }}
-                                Acciones</span>
-                            <span class="text-primary ms-2">Disponibles</span>
-                        </div>
+        <form action="" id="formulario">
+            @csrf
+            <div id="user-info" data-authenticated="{{ Auth::user() ? 'true' : 'false' }}">
 
-
-
-                        <div class="row mt-4">
-                            <div class="col-md-4 col-6 mb-3">
-                                
-
-                                <div class='ctrl'>
-                                    <div class='ctrl-button ctrl-button-decrement'>-</div>
-                                    <div class='ctrl-counter'>
-                                      <input class='ctrl-counter-input' maxlength='10' type='text' value='0' name="cantidad" id=cantidad>
-                                      <div class='ctrl-counter-num'>0</div>
-                                    </div>
-                                    <div class='ctrl-button ctrl-button-increment'>+</div>
-                                  </div>
-
-
-                            </div>
-                        </div>
-
-                        <div class="row">
-                            <dt class="col-3">Accion: </dt>
-                            <dd class="col-9" id="costo"> {{ $project->meta / $project->acciones }}</dd>
-
-                            <dt class="col-3">Monto: </dt>
-                            <dd class="col-9" id="monto"> 0</dd>
-                            
-                            <dt class="col-3">Comisión: </dt>
-                            <dd class="col-9" id="comision"> 0 </dd>
-
-                            <dt class="col-3">IVA Comisión: </dt>
-                            <dd class="col-9" id="iva"> 0 </dd>
-                        </div>
-
-                        <hr />
-                        <div class="mb-3">
-                            <span class="text-muted">Total = </span>
-                            <span class="h5" id="resultado"> 0 </span>
-                        </div>
-
-                        <a href="#" class="btn btn-primary shadow-0 mt-5"> <i class="me-1 fa fa-shopping-basket"></i>
-                            Realizar pedido </a>
-                    </div>
-                </main>
             </div>
-        </div>
+            <input type="hidden" name="project_id" value="{{ $project->id }}">
+
+            <div class="container">
+                <div class="row gx-5">
+                    <aside class="col-lg-6">
+                        <div class="border rounded-4 mb-3 d-flex justify-content-center">
+                            <img style="max-width: 100%; max-height: 100vh; margin: auto;" class="rounded-4 fit"
+                                src="{{ $project->logo_url }}" />
+                        </div>
+                        <!-- thumbs-wrap.// -->
+                        <!-- gallery-wrap .end// -->
+                    </aside>
+                    <main class="col-lg-6">
+                        <div class="ps-lg-3">
+                            <h4 class="text-dark">
+                                {{ $project->nombre }}
+                            </h4>
+                            <span>Empaque de berries</span>
+                            <div class="d-flex flex-row my-3">
+                                <div class="text-warning mb-1 me-2">
+                                    <i class="fa fa-star"></i>
+                                    <i class="fa fa-star"></i>
+                                    <i class="fa fa-star"></i>
+                                    <i class="fa fa-star"></i>
+                                    <i class="fa fa-star"></i>
+                                    <span class="ms-1">
+                                        5
+                                    </span>
+                                </div>
+                                <span class="text-muted"><i class="fas fa-chart-pie fa-sm mx-1"></i>{{ $project->acciones }}
+                                    Acciones</span>
+                                <span class="text-primary ms-2">Disponibles</span>
+                            </div>
+
+
+
+                            <div class="row mt-4">
+                                <div class="col-md-4 col-6 mb-3">
+
+
+                                    <div class='ctrl'>
+                                        <div class='ctrl-button ctrl-button-decrement'>-</div>
+                                        <div class='ctrl-counter'>
+                                            <input class='ctrl-counter-input' maxlength='10' type='text' value='0'
+                                                name="num_acciones" id=cantidad>
+                                            <div class='ctrl-counter-num'>0</div>
+                                        </div>
+                                        <div class='ctrl-button ctrl-button-increment'>+</div>
+                                    </div>
+
+
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <dt class="col-3">Accion: </dt>
+                                <dd class="col-9" id="costo"> {{ $project->meta / $project->acciones }}</dd>
+
+                                <dt class="col-3">Monto: </dt>
+                                <dd class="col-9" id="monto"> 0</dd>
+
+                                <dt class="col-3">Comisión: </dt>
+                                <dd class="col-9" id="comision"> 0 </dd>
+
+                                <dt class="col-3">IVA Comisión: </dt>
+                                <dd class="col-9" id="iva"> 0 </dd>
+                            </div>
+
+                            <hr />
+                            <div class="mb-3">
+                                <span class="text-muted">Total = </span>
+                                <span class="h5" id="resultado"> 0 </span>
+                            </div>
+
+                            <button type="submit" id="realizarPedido" class="btn btn-primary shadow-0 mt-5"> <i
+                                    class="me-1 fa fa-shopping-basket"></i>
+                                Realizar pedido </button>
+                        </div>
+                    </main>
+                </div>
+            </div>
+        </form>
     </section>
     <!-- content -->
 
@@ -131,8 +141,8 @@
                             </li>
                             <li class="nav-item d-flex" role="presentation">
                                 <a class="nav-link d-flex align-items-center justify-content-center w-100" id="ex1-tab-3"
-                                    data-mdb-toggle="pill" href="#ex1-pills-3" role="tab" aria-controls="ex1-pills-3"
-                                    aria-selected="false">Proyecto</a>
+                                    data-mdb-toggle="pill" href="#ex1-pills-3" role="tab"
+                                    aria-controls="ex1-pills-3" aria-selected="false">Proyecto</a>
                             </li>
                             <li class="nav-item d-flex" role="presentation">
                                 <a class="nav-link d-flex align-items-center justify-content-center w-100" id="ex1-tab-4"
@@ -235,7 +245,8 @@
                                         </div>
                                         <div class="item">
                                             <span class="text-secondary">Valor de la acción</span>
-                                            <span class="font-weight-bold">{{ ($project->meta/ $project->acciones) }}</span>
+                                            <span
+                                                class="font-weight-bold">{{ $project->meta / $project->acciones }}</span>
                                         </div>
                                         <div class="item">
                                             <span class="text-secondary">Calificación de riesgos</span>
@@ -246,16 +257,19 @@
                                                 @endphp
                                                 @switch(true)
                                                     @case ($riesgo >= 100)
-                                                    <span class="text-primary">Sin riesgo de inversión</span>
+                                                        <span class="text-primary">Sin riesgo de inversión</span>
                                                     @break
+
                                                     @case ($riesgo <= 90)
-                                                    <span class="text-success">Riesgo Bajo</span>
+                                                        <span class="text-success">Riesgo Bajo</span>
                                                     @break
+
                                                     @case ($riesgo <= 80)
-                                                    <span class="text-warning">Riesgo Medio</span>
+                                                        <span class="text-warning">Riesgo Medio</span>
                                                     @break
+
                                                     @case ($riesgo <= 50)
-                                                    <span class="text-danger">Riesgo Alto</span>
+                                                        <span class="text-danger">Riesgo Alto</span>
                                                     @break
                                                 @endswitch
                                             </span>

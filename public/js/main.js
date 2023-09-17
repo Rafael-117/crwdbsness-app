@@ -344,6 +344,74 @@ monto.textContent = (Nmonto);
 comision.textContent = (Ncomision);
 iva.textContent = (Niva);
 resultado.textContent= (Ntotal);
-
-
 }
+
+
+$('#formulario').submit(function(e) {
+  e.preventDefault();
+  if(document.getElementById('cantidad').value>=1){
+    var userElement = document.getElementById('user-info');
+
+    if (userElement) {
+        var isAuthenticated = userElement.getAttribute('data-authenticated') === 'true';
+
+        if (isAuthenticated) {
+          Swal.fire({
+            title: '¿Quieres proseguir con tu pedido?',
+            showDenyButton: true,
+            showCancelButton: false,
+            confirmButtonText: 'Si',
+            denyButtonText: `Cancelar`,
+          }).then((result) => {
+            if (result.isConfirmed) {
+              $.ajax({
+                type: "POST",
+                url: '/comprar-proyecto',
+                data: $(this).serialize(),
+                success: function(response)
+                {
+    
+                  Swal.fire({
+                    icon: 'success',
+                    title: 'Reserva exitosa',
+                    showConfirmButton: false,
+                    timer: 1500
+                  })
+                  setTimeout(() => {
+                    window.location.href = `/mail/${response}`;
+                  }, 1600);
+                  
+    
+                 
+               },
+               error:function(error){
+                console.log(e.message);
+               }
+           });
+
+            } else if (result.isDenied) {
+              Swal.fire('Cancelar la reserva?', '', 'info')
+            }
+          })
+
+        } else {
+          Swal.fire({
+            title: 'Espera un momento',
+            text: '¡En CRWDBSNESS, estamos emocionados de que quieras continuar tu compra!.  Para hacerlo, te animamos a registrarte o iniciar sesión',
+            showConfirmButton: false,
+            footer: '<a class="mr-4 btn btn-primary" href="/register">Registrarte</a> | <a class="ml-4 btn btn-primary" href="/login">Iniciar sesión</a>'
+          })
+
+        }
+    }
+  }else{
+
+    Swal.fire({
+      icon: 'error',
+      title: 'Selecciona una cantidad válida',
+      showConfirmButton: false,
+      timer: 1500
+    })
+  }
+
+});

@@ -30,7 +30,6 @@
 </head>
 
 <body data-bs-spy="scroll" data-bs-target=".navbar" data-bs-offset="51">
-
   @yield('spiner')
 
     <!-- Navbar Start -->
@@ -152,7 +151,7 @@
 
 
     <!-- JavaScript Libraries -->
-    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.4.1.js" integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU=" crossorigin="anonymous"></script>
     <script src="../js/sticker.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>
     <script src="../lib/wow/wow.min.js"></script>
@@ -164,7 +163,7 @@
     <script src="../lib/owlcarousel/owl.carousel.min.js"></script>
     <script src="../lib/isotope/isotope.pkgd.min.js"></script>
     <script src="../lib/lightbox/js/lightbox.min.js"></script>
-
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <!-- Template Javascript -->
     <script src="../js/main.js"></script>
 </body>

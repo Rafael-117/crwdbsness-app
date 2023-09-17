@@ -47,7 +47,7 @@
             <!-- Logo Header -->
             <div class="logo-header" data-background-color="blue">
 
-                <a href="{{ route('home') }}" class="logo">
+                <a href="{{ route('welcome') }}" class="logo">
                     <img src="../dashboard/assets/img/logo.svg" width="150px" alt="navbar brand" class="navbar-brand">
                 </a>
                 <button class="navbar-toggler sidenav-toggler ml-auto" type="button" data-toggle="collapse"
@@ -474,6 +474,7 @@
 
     <!-- Atlantis JS -->
     <script src="../dashboard/assets/js/atlantis.js"></script>
+    <script src="../dashboard/assets/js/charts.js"></script>
 
     <!-- Atlantis DEMO methods, don't include it in your project! -->
     {{-- <script src="../dashboard/assets/js/setting-demo.js"></script> --}}
@@ -482,3 +483,5 @@
 </body>
 
 </html>
+
+
