@@ -3,13 +3,13 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-
+use Mail;
 use App\Models\Projects;
 use App\Models\Companies;
 use App\Models\Sectors;
 use App\Models\Transactions;
 use Illuminate\Support\Facades\Auth;
-
+use App\Mail\enviarCorreo;
 class HomeController extends Controller
 {
     /**
@@ -92,14 +92,29 @@ class HomeController extends Controller
     }
 
 
-    public function show(string $id)
-    {
-        //
+
+    public function sendMail(Request $request){
+        $this->validate($request, [
+            'mensaje' => 'required|string',
+            'mail' => 'required|email',
+        ]);
+    
+        // Preparar los datos para el correo
+        $data = [
+            'mensaje' => $request->mensaje
+        ];
+    
+        // Crear una instancia del Mailable
+        $correo = new enviarCorreo($data); // Asegúrate de usar el nombre correcto de tu Mailable
+    
+        // Enviar el correo
+        Mail::to($request->mail)->send($correo);
+    
+        return 'Correo enviado correctamente';
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
+
+
     public function edit(string $id)
     {
         //

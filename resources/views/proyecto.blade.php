@@ -23,7 +23,7 @@
     <!-- company details -->
 
     <!-- content -->
-    <section class="py-5">
+    <section class="py-5">        
         <form action="" id="formulario">
             @csrf
             <div id="user-info" data-authenticated="{{ Auth::user() ? 'true' : 'false' }}">

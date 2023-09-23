@@ -18,6 +18,8 @@ Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('we
 Route::get('proyect/{id}', [App\Http\Controllers\HomeController::class, 'proyect'])->name('proyect');
 Route::post('/comprar-proyecto', [App\Http\Controllers\HomeController::class, 'store'])->name('comprar.proyecto');
 Route::get('mail/{id}', [App\Http\Controllers\HomeController::class, 'mail'])->name('mail');
+Route::post('sendMail', [App\Http\Controllers\HomeController::class, 'sendMail'])->name('SendMail');
+
 
 Auth::routes();
 Route::get('/home', [App\Http\Controllers\DashboardController::class, 'home'])->name('home');
