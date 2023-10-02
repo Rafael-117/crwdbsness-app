@@ -20,5 +20,8 @@ class Transactions extends Model
         'tipo',
         'status'
     ];
-
+    public function project()
+    {
+        return $this->belongsTo(Projects::class, 'project_id');
+    }
 }

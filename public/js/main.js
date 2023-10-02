@@ -1,4 +1,3 @@
-
 (function ($) {
   "use strict";
 
@@ -222,7 +221,6 @@
 
   (function() {
     'use strict';
-
     function ctrls() {
         var _this = this;
 
@@ -335,7 +333,7 @@ const total=(acciones)=>{
   let resultado = document.getElementById('resultado');
 
   let Nmonto = acciones*costo;
-  let Ncomision = Nmonto*.1;
+  let Ncomision = Nmonto*.01;
   let Niva = Ncomision*.16;
   let Ntotal= Nmonto+Ncomision+Niva;
 
@@ -354,14 +352,19 @@ $('#formulario').submit(function(e) {
 
     if (userElement) {
         var isAuthenticated = userElement.getAttribute('data-authenticated') === 'true';
+        var isAuthenticatedType = userElement.getAttribute('data-info-type') === 'true';
 
-        if (isAuthenticated) {
+        if (isAuthenticated && isAuthenticatedType) {
           Swal.fire({
             title: '¿Quieres proseguir con tu pedido?',
             showDenyButton: true,
             showCancelButton: false,
-            confirmButtonText: 'Si',
+            confirmButtonText: 'Si, confirmar',
             denyButtonText: `Cancelar`,
+            denyButtonColor: '#007bff',
+            customClass: {
+              confirmButton: 'btn-primary',
+            },
           }).then((result) => {
             if (result.isConfirmed) {
               $.ajax({
@@ -390,18 +393,34 @@ $('#formulario').submit(function(e) {
            });
 
             } else if (result.isDenied) {
-              Swal.fire('Cancelar la reserva?', '', 'info')
+              Swal.fire({
+                icon: 'info',
+                title: 'Cancelar la reserva?',
+                confirmButtonText: 'Si, cancelarla',
+                customClass: {
+                  confirmButton: 'btn-primary',
+                },
+              })
             }
           })
 
-        } else {
+        } 
+        if (isAuthenticated && !isAuthenticatedType ) {
+          Swal.fire({
+            title: 'Espera un momento',
+            text: 'Parece que aún te falta completar algunos datos en tu perfil. ¡No te pierdas las oportunidades que te esperan al hacerlo! ',
+            showConfirmButton: false,
+            footer: '<a class="ml-4 btn btn-primary" href="/perfil">Ir a mi perfil</a>'
+          })
+
+        }
+        if (!isAuthenticated){
           Swal.fire({
             title: 'Espera un momento',
             text: '¡En CRWDBSNESS, estamos emocionados de que quieras continuar tu compra!.  Para hacerlo, te animamos a registrarte o iniciar sesión',
             showConfirmButton: false,
             footer: '<a class="mr-4 btn btn-primary" href="/register">Registrarte</a> | <a class="ml-4 btn btn-primary" href="/login">Iniciar sesión</a>'
           })
-
         }
     }
   }else{
@@ -413,5 +432,15 @@ $('#formulario').submit(function(e) {
       timer: 1500
     })
   }
+
+});
+
+document.addEventListener("DOMContentLoaded", function() {
+  setTimeout(() => {
+    var elements = document.querySelectorAll('.ctrl-button-increment');
+    elements.forEach(function(element) {
+      element.click();
+    });
+  }, 1500);
 
 });

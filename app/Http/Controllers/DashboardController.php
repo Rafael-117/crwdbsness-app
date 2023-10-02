@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 use App\Models\User;
+use App\Models\Projects;
 use App\Custom\infoClass;
 use Illuminate\Support\Str;
+use App\Models\Transactions;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
@@ -24,6 +26,12 @@ class DashboardController extends Controller
         $info->buton = false;
         json_encode($info);
 
-        return view('dashboard.home', ['info'=>$info]);
+    $transactions = Transactions::where('user_id', Auth::user()->id)
+    ->where('status', 'Pendiente')
+    ->with('project') 
+    ->get();
+
+        return view('dashboard.home', ['info'=>$info, 'transactions'=>$transactions]);
     }
+   
 }

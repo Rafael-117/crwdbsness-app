@@ -191,10 +191,12 @@ class ProjectsController extends Controller
             $Project->riesgo='90%';
             $Project->rendimiento=$request->rendimiento; 
             $Project->acciones=(int)1000;
+            $Project->acciones_disponibles=(int)1000;
             $Project->pagos=$request->pago;
             $Project->periodo_pago=$request->periodo_pago;
             $Project->oferta_accionaria=$request->oferta_accionaria;//-----falta
             $Project->monto_financiamiento=$request->monto_financiamiento;  //-----falta
+            $Project->impuestos=(int)1;
             $Project->informacion_proyecto=collect($request->informacion_proyecto); //json
             $Project->campaña_comercial=collect($campaniaUrl); //json
             $Project->capitalizacion=$capitalizacion; //json

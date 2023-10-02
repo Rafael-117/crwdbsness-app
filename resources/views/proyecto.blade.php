@@ -18,17 +18,15 @@
             </div>
         </div>
     </div>
-
-
     <!-- company details -->
 
     <!-- content -->
     <section class="py-5">        
         <form action="" id="formulario">
             @csrf
-            <div id="user-info" data-authenticated="{{ Auth::user() ? 'true' : 'false' }}">
-
+            <div id="user-info" data-authenticated="{{ Auth::user() ? 'true' : 'false' }}" data-info-type="{{ Auth::user()->type =='Inversionista' ? 'true' : 'false' }}">
             </div>
+            <input type="hidden" name="project_id" value="{{ $project->id }}">
             <input type="hidden" name="project_id" value="{{ $project->id }}">
 
             <div class="container">
@@ -38,15 +36,14 @@
                             <img style="max-width: 100%; max-height: 100vh; margin: auto;" class="rounded-4 fit"
                                 src="{{ $project->logo_url }}" />
                         </div>
-                        <!-- thumbs-wrap.// -->
-                        <!-- gallery-wrap .end// -->
+            
                     </aside>
                     <main class="col-lg-6">
                         <div class="ps-lg-3">
                             <h4 class="text-dark">
                                 {{ $project->nombre }}
                             </h4>
-                            <span>Empaque de berries</span>
+                            <span>{{$sector->sector}}</span>
                             <div class="d-flex flex-row my-3">
                                 <div class="text-warning mb-1 me-2">
                                     <i class="fa fa-star"></i>
@@ -58,7 +55,7 @@
                                         5
                                     </span>
                                 </div>
-                                <span class="text-muted"><i class="fas fa-chart-pie fa-sm mx-1"></i>{{ $project->acciones }}
+                                <span class="text-muted"><i class="fas fa-chart-pie fa-sm mx-1"></i>{{ $project->acciones_disponibles }}
                                     Acciones</span>
                                 <span class="text-primary ms-2">Disponibles</span>
                             </div>

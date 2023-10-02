@@ -20,7 +20,7 @@ return new class extends Migration
             $table->text('descripcion');
             $table->string('encargado');
             $table->string('web');
-            $table->string('sector');
+            $table->unsignedBigInteger('sector');
             $table->string('calle');
             $table->string('numero');
             $table->string('colonia');
@@ -31,8 +31,9 @@ return new class extends Migration
             $table->string('status');
             $table->timestamps();
             $table->foreign('user_id')->references('id')->on('users');
+            $table->foreign('sector')->references('id')->on('sectors');
         });
-
+        
         
     }
 

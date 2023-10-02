@@ -27,10 +27,12 @@ return new class extends Migration
             $table->string('riesgo')->nullable();
             $table->string('rendimiento')->nullable();
             $table->mediumInteger('acciones')->nullable();
+            $table->mediumInteger('acciones_disponibles')->nullable();
             $table->string('pagos')->nullable();
             $table->string('periodo_pago')->nullable();
             $table->string('oferta_accionaria')->nullable();
             $table->string('monto_financiamiento')->nullable();
+            $table->string('impuestos')->nullable();
             $table->json('informacion_proyecto')->nullable();
             $table->json('campaña_comercial')->nullable();
             $table->json('capitalizacion')->nullable();

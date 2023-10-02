@@ -208,11 +208,11 @@
                             <div class="mb-4 mt-4">
                                 <div class="d-flex justify-content-between">
                                     <h6 class="font-weight-bold">{{ $project->meta }}</h6>
-                                    <h6 class="font-weight-bold">0%</h6>
+                                    <h6 class="font-weight-bold">{{ ((  $project->acciones - $project->acciones_disponibles ) / $project->acciones) * 100; }} %</h6>
                                 </div>
                                 <div class="progress">
                                     <div class="progress-bar bg-primary" role="progressbar" aria-valuenow="0"
-                                        aria-valuemin="0" aria-valuemax="100" style="width: 0%;"></div>
+                                        aria-valuemin="0" aria-valuemax="100" style="width: {{ ((  $project->acciones - $project->acciones_disponibles ) / $project->acciones) * 100; }}%;"></div>
                                 </div>
                             </div>
                             <a href="{{ route('proyect', $project->id) }}" class="btn btn-primary">aprender mas</a>
@@ -223,8 +223,6 @@
                         </div>
                     </div>
                 @endforeach
-
-
             </div>
         </div>
     </div>

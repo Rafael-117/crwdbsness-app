@@ -27,4 +27,8 @@ class Companies extends Model
             'logo_url',
             'status',
     ];
+    public function sector()
+    {
+        return $this->belongsTo(Sectors::class, 'sector');
+    }
 }

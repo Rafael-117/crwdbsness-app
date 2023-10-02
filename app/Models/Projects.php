@@ -23,10 +23,12 @@ class Projects extends Model
       'riesgo',
       'rendimiento',
       'acciones',
+      'acciones_disponibles',
       'pagos',
       'periodo_pago',
       'oferta_accionaria',
       'monto_financiamiento',
+      'impuestos',
       'informacion_proyecto',
       'campaña_comercial',
       'capitalizacion',
@@ -37,4 +39,8 @@ class Projects extends Model
       'adjuntos',
       'status',
     ];
+    public function transactions()
+    {
+        return $this->hasMany(Transaction::class, 'project_id');
+    }
 }

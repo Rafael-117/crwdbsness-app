@@ -21,7 +21,33 @@
                     </div>
                 </div>
             @endif
-            <div class="col-md-6">
+
+            @foreach ($transactions as $pedido)
+            <div class="col-md-6 cards">
+                <div class="card full-height card-{{mt_rand(1, 5);}}">
+                    <div class="card-body">
+                        <div class="row d-flex justify-content-between">
+                            <div class="card__icon"><i class="fas fa-bolt"></i> Pedido pendiente</div>
+                            <p class="card__exit"><i class="fas fa-times"></i></p>
+                        </div>
+                        <div class="mt-5">
+                            <h2 class="card__title">{{$pedido->project->nombre?? 'Nombre de proyecto'}}</h2>
+                            <h4 class="card__title"># de acciones : {{$pedido->num_acciones ?? '# Acciones'}}</h4>
+                        </div>
+                       
+                        <p class="card__apply">
+                            <a class="card__link" href="#">Terminar Pedido <i class="fas fa-arrow-right"></i></a>
+                        </p>
+                    </div>
+                </div>
+            </div>
+            @endforeach
+
+           
+
+
+            
+            {{-- <div class="col-md-6">
                 <div class="card full-height">
                     <div class="card-body">
                         <div class="card-title">Estadísticas generales</div>
@@ -80,7 +106,7 @@
                         </div>
                     </div>
                 </div>
-            </div>
+            </div> --}}
 
         </div>
     </div>

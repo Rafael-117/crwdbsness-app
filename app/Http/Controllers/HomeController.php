@@ -10,6 +10,7 @@ use App\Models\Sectors;
 use App\Models\Transactions;
 use Illuminate\Support\Facades\Auth;
 use App\Mail\enviarCorreo;
+use App\Mail\NotificacionCompraCliente;
 class HomeController extends Controller
 {
     /**
@@ -18,8 +19,8 @@ class HomeController extends Controller
     public function index()
     {
         $projects = Projects::all()
-        ->where('status', '=', 'Activo');
-        
+        ->where('status', '=', 'Activo')
+        ->where('estado', '=', 'Publicado');
        return view('welcome', ['projects' => $projects ]);
     }
 
@@ -28,7 +29,7 @@ class HomeController extends Controller
 
         $project = Projects::where('id', $id)->get()->first();
 
-        $company = Companies::where('id', $project->companie_id)->get()->first();
+        $company = Companies::where('id', $project->companie_id)->with('sector') ->get()->first();
         $sector = Sectors::where('id', $company->sector)->get()->first();
        
        return view('proyecto', [
@@ -55,7 +56,7 @@ class HomeController extends Controller
 
         $precio= ($project->meta / $project->acciones);
         $monto= ($project->meta / $project->acciones)* $request->num_acciones;
-        $comision = ($monto*0.1);
+        $comision = ($monto* ($project->impuestos/100));
         $impuestos = ($comision*0.16);
         $total = ($monto+ $comision + $impuestos);
 
@@ -81,14 +82,15 @@ class HomeController extends Controller
 
     public function mail(string $id)
     {
-       
-    $transactions = Transactions::where('id', $id)->get()->first();
-    $project = Projects::where('id', $transactions->project_id)->get()->first();
-
-    return view('mail', [
-        'project' => $project,
-        'transaction' => $transactions,
-    ]);
+        $user = Auth::user();
+        $transactions = Transactions::where('id', $id)->get()->first();
+        $project = Projects::where('id', $transactions->project_id)->get()->first();
+        $correo = new NotificacionCompraCliente($id);
+        Mail::to($user->email)->send($correo);
+        return view('mail', [
+            'project' => $project,
+            'transaction' => $transactions,
+        ]);
     }
 
 
