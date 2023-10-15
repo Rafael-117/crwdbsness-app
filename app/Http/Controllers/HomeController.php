@@ -18,10 +18,20 @@ class HomeController extends Controller
      */
     public function index()
     {
-        $projects = Projects::all()
-        ->where('status', '=', 'Activo')
-        ->where('estado', '=', 'Publicado');
-       return view('welcome', ['projects' => $projects ]);
+
+        // $projects = Projects::where('status', 'Activo')->with('companies') ->get();
+
+        // $projects = Projects::all()
+        // ->where('status', '=', 'Activo')
+        // ->where('estado', '=', 'Publicado');
+        // return $projects;
+
+        $projects = Projects::all();
+        foreach ($projects as $project) {
+            $company = $project->companies;
+        }
+
+        return view('welcome', ['projects' => $projects ]);
     }
 
     public function proyect( String $id)

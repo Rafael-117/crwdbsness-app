@@ -1,6 +1,6 @@
 @extends('layouts.app')
 @section('content')
-    {{-- <x-spiner></x-spiner> --}}
+    <x-spiner></x-spiner>
     <div class="static-slider1 py-4 containericons" id="home">
         <div class="bgg"></div>
         <div class="bgg bgg2"></div>
@@ -69,7 +69,7 @@
 
                         <!-- column  -->
                         <div class="d-flex d-md-flex align-content-center mb-4">
-                            <div class="display-5 mr-3"><i class="fas fa-shield-alt text-success-gradiant mx-5"></i>
+                            <div class="display-5 mr-3"><i class="fas fa-exchange-alt text-success-gradiant mx-5"></i>
                             </div>
                             <div>
                                 <h5>Retorno</h5>
@@ -84,7 +84,7 @@
                             <div class="display-5 mr-3"><i class="fas fa-brain text-success-gradiant mx-5"></i></div>
                             <div>
                                 <h5>Conocimiento </h5>
-                                <h6 class="subtitle font-weight-normal">contamos con gran experiencia y
+                                <h6 class="subtitle font-weight-normal">Contamos con gran experiencia y
                                     conocimiento profundo del mercado financiero </h6>
                             </div>
                         </div>
@@ -196,11 +196,11 @@
                 @foreach ($projects as $project)
                     <div class="card card-company m-5">
                         <div class="card-img">
-                            <img class="card-img-top img-fluid" src="{{ $project->logo_url }}" alt="Card image cap">
+                            <img class="card-img-top img-fluid" src="{{ $project->logo_url  ?? ''}}" alt="Card image cap">
                         </div>
                         <div class="card-body">
-                            <h4 class="card-title">{{ $project->name }}</h4>
-                            <h6 class="card-subtitle">Exportadora de berries</h6>
+                            <h4 class="card-title">{{ $project->companies->nombre }}</h4>
+                            <h6 class="card-subtitle">{{ $project->name }}</h6>
                             <p class="stars mb-3 mt-2"><i class="fas fa-star"></i><i class="fas fa-star"></i><i
                                     class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></p>
                             <b class="card-text">Rendimiento Estimado</b>
@@ -492,15 +492,6 @@
                         </div>
                         <div class="logo-item">
                             <img src="/img/company-logos/3.png" alt="" />
-                        </div>
-                        <div class="logo-item">
-                            <img src="/img/company-logos/4.png" alt="" />
-                        </div>
-                        <div class="logo-item">
-                            <img src="/img/company-logos/5.png" alt="" />
-                        </div>
-                        <div class="logo-item">
-                            <img src="/img/company-logos/5.png" alt="" />
                         </div>
                     </div>
                 </div>

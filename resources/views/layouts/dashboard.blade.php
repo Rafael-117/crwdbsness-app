@@ -32,7 +32,7 @@
     <!-- CSS Files -->
     <link rel="stylesheet" href="../dashboard/assets/css/bootstrap.min.css">
     <link rel="stylesheet" href="../dashboard/assets/css/atlantis.css">
-
+    <link rel="stylesheet" href="../dashboard/assets/css/calendar.css">
     <!-- CSS Just for demo purpose, don't include it in your project -->
     {{-- <link rel="stylesheet" href="../dashboard/assets/css/demo.css"> --}}
 
@@ -336,6 +336,8 @@
     <script src="../dashboard/assets/js/atlantis.js"></script>
     <script src="../dashboard/assets/js/charts.js"></script>
 
+     <!-- Calendar JS -->
+     <script src='../dashboard/assets/js/fullCalendar.js'></script>
     <!-- Atlantis DEMO methods, don't include it in your project! -->
     {{-- <script src="../dashboard/assets/js/setting-demo.js"></script> --}}
 
@@ -343,5 +345,4 @@
 </body>
 
 </html>
-
 

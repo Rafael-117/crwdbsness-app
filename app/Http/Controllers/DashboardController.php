@@ -33,5 +33,16 @@ class DashboardController extends Controller
 
         return view('dashboard.home', ['info'=>$info, 'transactions'=>$transactions]);
     }
+
+    public function calendar()
+    {
+        $info = new InfoClass;
+        $info->title = "Detalles de tus Inversiones";
+        $info->description = "En esta sección, encontrarás una descripción detallada de tus inversiones financieras. Así como también información esencial que te permite realizar un seguimiento preciso de tus activos financieros.";
+        $info->buton = false;
+        json_encode($info);
+
+        return view('dashboard.calendar', ['info'=>$info]);
+    }
    
 }

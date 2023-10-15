@@ -43,4 +43,8 @@ class Projects extends Model
     {
         return $this->hasMany(Transaction::class, 'project_id');
     }
+    public function companies()
+    {
+        return $this->belongsTo(Companies::class, 'id');
+    }
 }

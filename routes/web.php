@@ -23,6 +23,7 @@ Route::get('mail/{id}', [App\Http\Controllers\HomeController::class, 'mail'])->n
 
 Auth::routes();
 Route::get('/home', [App\Http\Controllers\DashboardController::class, 'home'])->name('home');
+Route::get('/calendar', [App\Http\Controllers\DashboardController::class, 'calendar'])->name('calendar');
 Route::get('/perfil', [App\Http\Controllers\UsersController::class, 'perfil'])->name('perfil');
 Route::patch('/perfil', [App\Http\Controllers\UsersController::class, 'editar'])->name('editar.perfil');
 

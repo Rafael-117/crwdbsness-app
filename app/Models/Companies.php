@@ -31,4 +31,8 @@ class Companies extends Model
     {
         return $this->belongsTo(Sectors::class, 'sector');
     }
+    public function projects()
+    {
+        return $this->hasMany(Projects::class);
+    }
 }
