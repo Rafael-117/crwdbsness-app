@@ -338,6 +338,7 @@
 
      <!-- Calendar JS -->
      <script src='../dashboard/assets/js/fullCalendar.js'></script>
+     <script src='../dashboard/assets/js/locales-all.fullCalendar.js'></script>
     <!-- Atlantis DEMO methods, don't include it in your project! -->
     {{-- <script src="../dashboard/assets/js/setting-demo.js"></script> --}}
 

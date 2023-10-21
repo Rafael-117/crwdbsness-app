@@ -1,32 +1,38 @@
 <script>
 document.addEventListener('DOMContentLoaded', function() {
-  var calendarEl = document.getElementById('calendar');
+ 
+var calendarEl = document.getElementById('calendar');
 
-  var calendar = new FullCalendar.Calendar(calendarEl, {
-    editable: false,
-    lang: 'es',
-    selectable: true,
-    businessHours: true,
-    dayMaxEvents: true, // allow "more" link when too many events
-    events: [
-      {
-        title: 'i',
-        start: '2023-10-10',
-        icon: 'fa-money-bill-wave'
-      },
-    ],
-    eventRender: function(info) {
-      var icono = info.event.extendedProps.icon; // Obtenemos el nombre del icono del objeto de evento
-      var iconoHTML = '<span class="fas ' + icono + '"></span>'; // Agregamos un espacio entre "fas" y el nombre del icono
-      info.el.querySelector('.fc-title').innerHTML = iconoHTML + info.event.title;
-    }
-  });
-
-  calendar.render();
+var calendar = new FullCalendar.Calendar(calendarEl, {
+  headerToolbar: {
+    left: 'prev,today,next',
+    center: 'title',
+    right: 'dayGridWeek,dayGridMonth'
+  },
+  fixedWeekCount: false,
+  weekNumbersWithinDays: 35,
+  height: 626,
+  // initialDate: '2023-01-12',
+  locale: "es",
+  buttonIcons: true,
+  navLinks: true, // can click day/week names to navigate views
+  editable: true,
+  dayMaxEvents: true, // allow "more" link when too many events
+  events: [
+    {
+      title: 'Deposito',  //titulo del evento
+      start: '2023-10-18', //Fecha de Inicio
+      end: '2023-10-18', //Fecha de Fin
+      icon: 'fas fa-hand-holding-usd'
+    },
+  ],
+  eventContent: function(arg) {
+    const icon = `<i class="${arg.event.extendedProps.icon}"></i> ${arg.event.title}`;
+    return { html: `${icon} ${arg.timeText}` };
+  }
 });
 
+calendar.render();
 
-var elementoHijo = document.querySelector('.fc-event');
-elementoHijo.parentNode.parentNode.parentNode.parentNode.style.background="#ff004d";
-
+});
 </script>
