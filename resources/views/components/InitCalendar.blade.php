@@ -15,8 +15,8 @@ var calendar = new FullCalendar.Calendar(calendarEl, {
   // initialDate: '2023-01-12',
   locale: "es",
   buttonIcons: true,
-  navLinks: true, // can click day/week names to navigate views
-  editable: true,
+  navLinks: false, // can click day/week names to navigate views
+  editable: false,
   dayMaxEvents: true, // allow "more" link when too many events
   events: [
     {

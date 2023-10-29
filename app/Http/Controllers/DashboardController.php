@@ -31,7 +31,12 @@ class DashboardController extends Controller
     ->with('project') 
     ->get();
 
-        return view('dashboard.home', ['info'=>$info, 'transactions'=>$transactions]);
+    $proyectos = Transactions::where('user_id', Auth::user()->id)
+    ->where('status', 'Aprobado')
+    ->with('project') 
+    ->get();
+
+        return view('dashboard.home', ['info'=>$info, 'transactions'=>$transactions , 'proyectos'=>$proyectos]);
     }
 
     public function calendar()

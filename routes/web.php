@@ -41,3 +41,5 @@ Route::post('/guardar-proyecto', [App\Http\Controllers\ProjectsController::class
 Route::delete('/eliminar-proyecto/{project}', [App\Http\Controllers\ProjectsController::class, 'destroy'])->name('eliminar.proyecto');
 Route::get('/proyecto/{project}', [App\Http\Controllers\ProjectsController::class, 'show'])->name('editar.proyecto');
 Route::patch('actualizar-proyecto/{project}', [App\Http\Controllers\ProjectsController::class, 'update'])->name('actualizar.proyecto');
+
+Route::delete('/transactions/{id}', [App\Http\Controllers\TransactionsController::class, 'cancel' ])->name('cancelar.transaccion');

@@ -62,4 +62,14 @@ class TransactionsController extends Controller
     {
         //
     }
+
+    public function cancel($id)
+    {
+        $transaction = Transactions::find($id);
+        if (!$transaction) {
+            return 'Error';
+        }
+        $transaction->delete();
+        return 'Eliminado';
+    }
 }
